@@ -1,3 +1,12 @@
+
+const skills = [
+  { skill: "HTML", level: "Beginner", backgroundColor: "#d4f4dd" },      // Light Green
+  { skill: "CSS", level: "Beginner", backgroundColor: "#d4f4dd" },       // Light Green
+  { skill: "JavaScript", level: "Intermediate", backgroundColor: "#fff3cd" }, // Light Yellow
+  { skill: "React.js", level: "Intermediate", backgroundColor: "#fff3cd" },   // Light Yellow
+  { skill: "Node.js", level: "Advanced", backgroundColor: "#f8d7da" },   // Light Red
+  { skill: "MongoDB", level: "Advanced", backgroundColor: "#f8d7da" }    // Light Red
+];
 function App() {
   return (
     <>
@@ -39,26 +48,29 @@ function Intro() {
 }
 
 function Skills() {
+  console.log(skills);
   return (
     <>
       <div style={{display:'flex',gap:'7px',width:'100%',flexWrap:'wrap'}}>
-        <Skill skl="React " emj="💪" bgColor='#217095ff' />
-        <Skill skl="Javascript " emj="❤️"  bgColor='yellow'/>
-        <Skill skl="HTML " emj="❤️‍🔥"   bgColor='#B2F2BB'/>
-        <Skill skl="CSS " emj="💥"  bgColor='#f13434d7'/>
-        <Skill skl="Tailwind " emj="🚀"  bgColor='#89CFF0'/>
-        <Skill skl="Nodejs " emj="💣"  bgColor='#34c742ff'/>
+      {skills.map((skill) => <Skill skill={skill.skill} level={skill.level} emj="💪" bgColor={skill.backgroundColor} key={skill.skill} />)}
+  
       </div>
     </>
   );
 }
 
-function Skill(p) {
+function Skill({skill,level,emj,bgColor}) {
   return (
-    <div className='skill'style={{color:'black',backgroundColor:`${p.bgColor}`,padding:'5px 15px',borderRadius:'5px',fontWeight:'bold'}}>
+    <div className='skill'style={{color:'black',backgroundColor:`${bgColor}`,padding:'5px 15px',borderRadius:'5px',fontWeight:'bold'}}>
       <div>
-        <span>{p.skl}</span>
-        <span>{p.emj}</span>
+        <span>{skill}</span>
+        <span>
+          {level==="Beginner"&&'👶'}
+          {level==="Intermediate"&&'💪'}
+          {level==="Advanced"&&'🚀'}
+
+
+        </span>
       </div>
     </div>
   );
